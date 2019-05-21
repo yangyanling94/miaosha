@@ -15,4 +15,10 @@ public interface ItemService {
 
     //浏览商品详情
     ItemModel getItemById(Integer id);
+
+    //库存扣减
+    Boolean decreaseStock(Integer itemId, Integer amount);
+
+    //商品销量增加
+    void increaseSales(Integer itemId, Integer amount);
 }

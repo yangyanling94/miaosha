@@ -94,8 +94,19 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
         ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(id);
-        ItemModel itemModel = convertItemModelFromDO(itemDO, itemStockDO);
-        return itemModel;
+        return convertItemModelFromDO(itemDO, itemStockDO);
+    }
+
+    @Override
+    public Boolean decreaseStock(Integer itemId, Integer amount) {
+        int affectedRow = itemStockDOMapper.decreaseStock(itemId, amount);
+        return affectedRow > 0;
+    }
+
+    @Override
+    @Transactional
+    public void increaseSales(Integer itemId, Integer amount) {
+        itemDOMapper.increaseSales(itemId, amount);
     }
 
     private ItemModel convertItemModelFromDO(ItemDO itemDO, ItemStockDO itemStockDO) {
